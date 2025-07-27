@@ -25,7 +25,7 @@ export default function App() {
   const [search, setSearch] = useState("");    
   const [debouncedSearch] = useDebounce(search, 500);  
   
-  const { data, isLoading, isError } = useQuery<NOTEHUBResponse>({
+  const { data, isLoading } = useQuery<NOTEHUBResponse>({
      queryKey: ["notes", page, debouncedSearch],
      queryFn: () => fetchNotes(page, 12, debouncedSearch),
      placeholderData: (prevData) => prevData,
@@ -49,20 +49,20 @@ export default function App() {
       <div className={css.app}>
         <header className={css.toolbar}>
               <SearchBox value={search} onChange={handleSearchChange}  />
-              {notes.length > 0 && (
-                  <Pagination
-                     currentPage={page}
-                     onPageChange={setPage}
-                     pageCount={pageCount}
-                  />
-              )}
+              {pageCount > 1 && (
+                    <Pagination
+                        currentPage={page}
+                        onPageChange={setPage}
+                        pageCount={pageCount}
+                    />
+               )}
               <button className={css.button} onClick={openModal} type="button">
                    Create note +
               </button>
           </header>
           {isLoading && <strong>Loading...</strong>}
           {notes.length > 0 && (
-             <NoteList notes={notes} isLoading={isLoading} isError={isError} />
+             <NoteList notes={notes}/>
           )}
           {isModalOpen && (
               <Modal onClose={closeModal}>

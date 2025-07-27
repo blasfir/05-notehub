@@ -10,22 +10,16 @@ import { deleteNote } from "../../services/noteService";
 
 interface NoteListProps {
     notes: Note[];
-    isLoading: boolean;
-  isError: boolean;
 }
 
-export default function NoteList({ notes, isLoading, isError }: NoteListProps) {
+export default function NoteList({ notes }: NoteListProps) {
   const queryClient = useQueryClient();
-  const deleteMutation = useMutation({
-    mutationFn: deleteNote,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["notes"] });
-    },
-  });
-    
-  if (isLoading) return <p>Loading...</p>;
-  if (isError) return <p>An error occurred while loading.</p>;
-  if (notes.length === 0) return <p>No notes found.</p>;
+    const deleteMutation = useMutation({
+        mutationFn: deleteNote,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["notes"] });
+        },
+    });
 
     
   return (
