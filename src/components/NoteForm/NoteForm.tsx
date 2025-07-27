@@ -1,9 +1,8 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { NoteTag } from '../../types/note'
 import { createNote } from '../../services/noteService';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import type { newNote } from '../../types/note';
+import type { NewNote } from '../../types/note';
 import css from './NoteForm.module.css';
 import type { FormikHelpers } from "formik";
 
@@ -12,7 +11,7 @@ interface NoteFormProps {
   onCancel: () => void;
 }
 
-const initialValues: newNote = {
+const initialValues: NewNote = {
   title: '',
   content: '',
   tag: '',
@@ -26,7 +25,7 @@ const validationSchema = Yup.object({
   content: Yup.string()
     .max(500, 'Content must be at most 500 characters'),
   tag: Yup.string()
-    .oneOf(NoteTag, 'Invalid tag')
+    .oneOf(["Todo", "Work", "Personal", "Meeting", "Shopping"], 'Invalid tag')
     .required('Tag is required'),
 });
 

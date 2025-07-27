@@ -1,5 +1,5 @@
 export interface Note {
-  id: string;
+  id: number;
   title: string;
   content: string;
   tag: string;
@@ -7,10 +7,9 @@ export interface Note {
   updatedAt: string;
 }
 
-export interface newNote {
+export interface NewNote {
   title: string;
   content: string;
   tag: string;
 }
 
-export const NoteTag = ['Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];

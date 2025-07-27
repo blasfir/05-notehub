@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { Note, newNote } from '../types/note';
+import type { Note, NewNote } from '../types/note';
 
 const BASE_URL = 'https://notehub-public.goit.study/api/notes';
 const TOKEN = import.meta.env.VITE_NOTEHUB_TOKEN;
@@ -40,7 +40,7 @@ export const fetchNotes = async (page: number = 1, perPage: number = 12, search:
 
 };
 
-export const createNote = async (note: newNote): Promise<Note> => {
+export const createNote = async (note: NewNote): Promise<Note> => {
   const config = {
     headers: {
       Authorization: `Bearer ${TOKEN}`,
